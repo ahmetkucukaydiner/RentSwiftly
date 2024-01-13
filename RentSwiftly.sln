@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{650E9AA2-B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentSwiftly.Domain", "Core\RentSwiftly.Domain\RentSwiftly.Domain.csproj", "{4DC0E0F1-D8C7-4112-8F66-13B1AFD03EEA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{8FD98856-8E5D-4B36-91C6-652ABD64C9B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentSwiftly.Persistence", "Infrastructure\RentSwiftly.Persistence\RentSwiftly.Persistence.csproj", "{E40B2BCF-0D80-4FF7-A82B-8194F6C075D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +21,17 @@ Global
 		{4DC0E0F1-D8C7-4112-8F66-13B1AFD03EEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DC0E0F1-D8C7-4112-8F66-13B1AFD03EEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DC0E0F1-D8C7-4112-8F66-13B1AFD03EEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E40B2BCF-0D80-4FF7-A82B-8194F6C075D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E40B2BCF-0D80-4FF7-A82B-8194F6C075D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E40B2BCF-0D80-4FF7-A82B-8194F6C075D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E40B2BCF-0D80-4FF7-A82B-8194F6C075D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4DC0E0F1-D8C7-4112-8F66-13B1AFD03EEA} = {650E9AA2-BAA8-4C6A-AA11-A9BCA50DD4F0}
+		{E40B2BCF-0D80-4FF7-A82B-8194F6C075D4} = {8FD98856-8E5D-4B36-91C6-652ABD64C9B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE3BD606-BB98-41BC-BFA0-4F6951CE8131}
