@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\RentSwiftly.Application\RentSwiftly.Application.csproj" />
     <ProjectReference Include="..\..\Core\RentSwiftly.Domain\RentSwiftly.Domain.csproj" />
   </ItemGroup>
 
