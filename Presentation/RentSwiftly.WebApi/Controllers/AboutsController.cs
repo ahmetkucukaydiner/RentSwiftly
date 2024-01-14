@@ -31,7 +31,7 @@ namespace RentSwiftly.WebApi.Controllers
             return Ok(values);
         }
 
-        [HttpGet("getbyid")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetAbout(int id)
         {
             var value = await _getAboutByIdQueryHandler.Handle(new GetAboutByIdQuery(id));
