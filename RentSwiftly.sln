@@ -5,11 +5,17 @@ VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{650E9AA2-BAA8-4C6A-AA11-A9BCA50DD4F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentSwiftly.Domain", "Core\RentSwiftly.Domain\RentSwiftly.Domain.csproj", "{4DC0E0F1-D8C7-4112-8F66-13B1AFD03EEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentSwiftly.Domain", "Core\RentSwiftly.Domain\RentSwiftly.Domain.csproj", "{4DC0E0F1-D8C7-4112-8F66-13B1AFD03EEA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{8FD98856-8E5D-4B36-91C6-652ABD64C9B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentSwiftly.Persistence", "Infrastructure\RentSwiftly.Persistence\RentSwiftly.Persistence.csproj", "{E40B2BCF-0D80-4FF7-A82B-8194F6C075D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentSwiftly.Persistence", "Infrastructure\RentSwiftly.Persistence\RentSwiftly.Persistence.csproj", "{E40B2BCF-0D80-4FF7-A82B-8194F6C075D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{BD5911D0-8ECA-44FE-A56B-4DA758F831EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentSwiftly.WebApi", "Presentation\RentSwiftly.WebApi\RentSwiftly.WebApi.csproj", "{00F698F3-D8A8-44BD-B020-4A395E230312}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentSwiftly.Application", "Core\RentSwiftly.Application\RentSwiftly.Application.csproj", "{CB452D7F-90B3-43C5-8BA5-4CE84C0B4A95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +31,14 @@ Global
 		{E40B2BCF-0D80-4FF7-A82B-8194F6C075D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E40B2BCF-0D80-4FF7-A82B-8194F6C075D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E40B2BCF-0D80-4FF7-A82B-8194F6C075D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00F698F3-D8A8-44BD-B020-4A395E230312}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00F698F3-D8A8-44BD-B020-4A395E230312}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00F698F3-D8A8-44BD-B020-4A395E230312}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00F698F3-D8A8-44BD-B020-4A395E230312}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB452D7F-90B3-43C5-8BA5-4CE84C0B4A95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB452D7F-90B3-43C5-8BA5-4CE84C0B4A95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB452D7F-90B3-43C5-8BA5-4CE84C0B4A95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB452D7F-90B3-43C5-8BA5-4CE84C0B4A95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +46,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4DC0E0F1-D8C7-4112-8F66-13B1AFD03EEA} = {650E9AA2-BAA8-4C6A-AA11-A9BCA50DD4F0}
 		{E40B2BCF-0D80-4FF7-A82B-8194F6C075D4} = {8FD98856-8E5D-4B36-91C6-652ABD64C9B3}
+		{00F698F3-D8A8-44BD-B020-4A395E230312} = {BD5911D0-8ECA-44FE-A56B-4DA758F831EC}
+		{CB452D7F-90B3-43C5-8BA5-4CE84C0B4A95} = {650E9AA2-BAA8-4C6A-AA11-A9BCA50DD4F0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE3BD606-BB98-41BC-BFA0-4F6951CE8131}
