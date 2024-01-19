@@ -12,8 +12,8 @@ using RentSwiftly.Persistence.Context;
 namespace RentSwiftly.Persistence.Migrations
 {
     [DbContext(typeof(RentSwiftlyContext))]
-    [Migration("20240114133740_mig_firts")]
-    partial class mig_firts
+    [Migration("20240119190838_first_mig")]
+    partial class first_mig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

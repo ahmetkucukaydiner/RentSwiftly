@@ -1,14 +1,19 @@
 using RentSwiftly.Application.Features.CQRS.Handlers.AboutHandlers;
 using RentSwiftly.Application.Features.CQRS.Handlers.BannerHandlers;
+using RentSwiftly.Application.Features.CQRS.Handlers.BrandHandlers;
+using RentSwiftly.Application.Features.CQRS.Handlers.CarHandlers;
 using RentSwiftly.Application.Interfaces;
+using RentSwiftly.Application.Interfaces.CarInterfaces;
 using RentSwiftly.Persistence.Context;
 using RentSwiftly.Persistence.Repositories;
+using RentSwiftly.Persistence.Repositories.CarRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<RentSwiftlyContext>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(ICarRepository), typeof(CarRepository));
 
 builder.Services.AddScoped<GetAboutQueryHandler>();
 builder.Services.AddScoped<GetAboutByIdQueryHandler>();
@@ -21,6 +26,20 @@ builder.Services.AddScoped<GetBannerByIdQueryHandler>();
 builder.Services.AddScoped<CreateBannerCommandHandler>();
 builder.Services.AddScoped<DeleteBannerCommandHandler>();
 builder.Services.AddScoped<UpdateBannerCommandHandler>();
+
+builder.Services.AddScoped<GetBrandByIdQueryHandler>();
+builder.Services.AddScoped<GetBrandQueryHandler>();
+builder.Services.AddScoped<CreateBrandCommandHandler>();
+builder.Services.AddScoped<DeleteBrandCommandHandler>();
+builder.Services.AddScoped<UpdateBrandCommandHandler>();
+
+builder.Services.AddScoped<GetCarByIdQueryHandler>();
+builder.Services.AddScoped<GetCarQueryHandler>();
+builder.Services.AddScoped<CreateCarCommandHandler>();
+builder.Services.AddScoped<DeleteCarCommandHandler>();
+builder.Services.AddScoped<UpdateCarCommandHandler>();
+builder.Services.AddScoped<GetCarWithBrandQueryHandler>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
