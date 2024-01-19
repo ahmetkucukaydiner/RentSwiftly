@@ -2,6 +2,8 @@ using RentSwiftly.Application.Features.CQRS.Handlers.AboutHandlers;
 using RentSwiftly.Application.Features.CQRS.Handlers.BannerHandlers;
 using RentSwiftly.Application.Features.CQRS.Handlers.BrandHandlers;
 using RentSwiftly.Application.Features.CQRS.Handlers.CarHandlers;
+using RentSwiftly.Application.Features.CQRS.Handlers.CategoryHandlers;
+using RentSwiftly.Application.Features.CQRS.Handlers.ContactHandlers;
 using RentSwiftly.Application.Interfaces;
 using RentSwiftly.Application.Interfaces.CarInterfaces;
 using RentSwiftly.Persistence.Context;
@@ -39,6 +41,18 @@ builder.Services.AddScoped<CreateCarCommandHandler>();
 builder.Services.AddScoped<DeleteCarCommandHandler>();
 builder.Services.AddScoped<UpdateCarCommandHandler>();
 builder.Services.AddScoped<GetCarWithBrandQueryHandler>();
+
+builder.Services.AddScoped<GetCategoryByIdQueryHandler>();
+builder.Services.AddScoped<GetCategoryQueryHandler>();
+builder.Services.AddScoped<CreateCategoryCommandHandler>();
+builder.Services.AddScoped<DeleteCategoryCommandHandler>();
+builder.Services.AddScoped<UpdateCategoryCommandHandler>();
+
+builder.Services.AddScoped<GetContactByIdQueryHandler>();
+builder.Services.AddScoped<GetContactQueryHandler>();
+builder.Services.AddScoped<CreateContactCommandHandler>();
+builder.Services.AddScoped<DeleteContactCommandHandler>();
+builder.Services.AddScoped<UpdateContactCommandHandler>();
 
 
 builder.Services.AddControllers();
