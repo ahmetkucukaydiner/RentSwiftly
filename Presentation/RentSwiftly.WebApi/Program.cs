@@ -6,6 +6,7 @@ using RentSwiftly.Application.Features.CQRS.Handlers.CategoryHandlers;
 using RentSwiftly.Application.Features.CQRS.Handlers.ContactHandlers;
 using RentSwiftly.Application.Interfaces;
 using RentSwiftly.Application.Interfaces.CarInterfaces;
+using RentSwiftly.Application.Services;
 using RentSwiftly.Persistence.Context;
 using RentSwiftly.Persistence.Repositories;
 using RentSwiftly.Persistence.Repositories.CarRepositories;
@@ -53,6 +54,8 @@ builder.Services.AddScoped<GetContactQueryHandler>();
 builder.Services.AddScoped<CreateContactCommandHandler>();
 builder.Services.AddScoped<DeleteContactCommandHandler>();
 builder.Services.AddScoped<UpdateContactCommandHandler>();
+
+builder.Services.AddApplicationService(builder.Configuration);
 
 
 builder.Services.AddControllers();

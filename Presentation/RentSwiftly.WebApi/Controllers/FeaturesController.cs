@@ -27,7 +27,7 @@ namespace RentSwiftly.WebApi.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteFeature(int id)
         {
-            await _mediator.Send(id);
+            await _mediator.Send(new DeleteFeatureCommand(id));
             return Ok("Özellik silindi.");
         }
 
