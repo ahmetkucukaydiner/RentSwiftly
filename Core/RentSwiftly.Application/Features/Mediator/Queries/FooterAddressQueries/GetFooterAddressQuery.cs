@@ -6,9 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RentSwiftly.Application.Features.Mediator.Queries.FooterQueries
+namespace RentSwiftly.Application.Features.Mediator.Queries.FooterQueries;
+
+public class GetFooterAddressQuery : IRequest<List<GetFooterAddressQueryResult>>
 {
-    public class GetFooterAddressQuery : IRequest<List<GetFooterAddressQueryResult>>
-    {
-    }
 }
