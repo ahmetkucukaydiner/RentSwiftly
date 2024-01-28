@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using RentSwiftly.Dto.AboutDtos;
 
 namespace RentSwiftly.WebUI.ViewComponents.AboutViewComponents
 {
@@ -20,7 +21,8 @@ namespace RentSwiftly.WebUI.ViewComponents.AboutViewComponents
             if(responseMessage.IsSuccessStatusCode) 
             { 
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<ResultAboutDto>>(jsonData);
+                return View(values);
             }
 
             return View();
