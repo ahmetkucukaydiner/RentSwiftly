@@ -163,7 +163,7 @@ namespace RentSwiftly.Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Icon = table.Column<int>(type: "int", nullable: false)
+                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

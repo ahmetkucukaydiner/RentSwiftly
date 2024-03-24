@@ -12,7 +12,7 @@ using RentSwiftly.Persistence.Context;
 namespace RentSwiftly.Persistence.Migrations
 {
     [DbContext(typeof(RentSwiftlyContext))]
-    [Migration("20240119190838_first_mig")]
+    [Migration("20240205180625_first_mig")]
     partial class first_mig
     {
         /// <inheritdoc />
@@ -379,8 +379,9 @@ namespace RentSwiftly.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SocialMediaID"));
 
-                    b.Property<int>("Icon")
-                        .HasColumnType("int");
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
