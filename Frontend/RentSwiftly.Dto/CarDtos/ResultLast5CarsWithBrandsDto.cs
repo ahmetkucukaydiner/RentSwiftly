@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RentSwiftly.Dto.CarDtos
 {
-    public class ResultCarWithBrandsDtos
+    public class ResultLast5CarsWithBrandsDto
     {
         public int CarID { get; set; }
         public int BrandID { get; set; }

@@ -2,27 +2,28 @@
 using Newtonsoft.Json;
 using RentSwiftly.Dto.CarDtos;
 
-namespace RentSwiftly.WebUI.Controllers
+namespace RentSwiftly.WebUI.ViewComponents.DefaultViewComponents
 {
-    public class CarController : Controller
+    public class _DefaultLast5CarsWithBrandsComponentPartial : ViewComponent
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public CarController(IHttpClientFactory httpClientFactory)
+        public _DefaultLast5CarsWithBrandsComponentPartial(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7000/api/Cars/GetCarWithBrands");
+            var responseMessage = await client.GetAsync("https://localhost:7000/api/Cars/GetLast5CarsWithBrands");
             if(responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultCarWithBrandsDto>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<ResultLast5CarsWithBrandsDto>>(jsonData);
                 return View(values);
             }
+
             return View();
         }
     }
