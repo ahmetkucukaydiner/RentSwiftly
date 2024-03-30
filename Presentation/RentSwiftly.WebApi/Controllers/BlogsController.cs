@@ -51,5 +51,12 @@ namespace RentSwiftly.WebApi.Controllers
             var value = await _mediator.Send(new GetBlogByIdQuery(id));
             return Ok(value);
         }
+
+        [HttpGet("GetLast3BlogsWithAuthors")]
+        public async Task<IActionResult> GetLast3BlogsWithAuthors()
+        {
+            var values = await _mediator.Send(new GetLast3BlogsWithAuthorsQuery());
+            return Ok(values);
+        }
     }
 }
