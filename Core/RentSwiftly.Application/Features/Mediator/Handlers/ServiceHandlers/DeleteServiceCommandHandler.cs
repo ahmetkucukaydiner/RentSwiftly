@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using RentSwiftly.Application.Features.Mediator.Commands.ServiceCommands;
-using RentSwiftly.Application.Features.Mediator.Commands.ServiceCommands;
 using RentSwiftly.Application.Interfaces;
 using RentSwiftly.Domain.Entities;
 using System;
