@@ -64,8 +64,8 @@ namespace RentSwiftly.WebApi.Controllers
             return Ok(value);
         }
 
-        [HttpGet("GetCarWithBrand")]
-        public IActionResult GetCarWithBrand()
+        [HttpGet("GetCarWithBrands")]
+        public IActionResult GetCarWithBrands()
         {
             var values =  _getCarWithBrandQueryHandler.Handle();
             return Ok(values);

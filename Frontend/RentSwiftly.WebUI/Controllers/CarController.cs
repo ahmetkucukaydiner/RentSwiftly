@@ -15,6 +15,8 @@ namespace RentSwiftly.WebUI.Controllers
 
         public async Task<IActionResult> Index()
         {
+            ViewBag.v1 = "Araçlar";
+            ViewBag.v2 = "Aracınızı seçiniz";
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7000/api/Cars/GetCarWithBrands");
             if(responseMessage.IsSuccessStatusCode)
