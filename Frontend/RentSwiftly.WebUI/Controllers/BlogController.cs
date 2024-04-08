@@ -27,5 +27,12 @@ namespace RentSwiftly.WebUI.Controllers
             }
             return View();
         }
+
+        public async Task<IActionResult> BlogDetail(int id)
+        {
+            ViewBag.v1 = "Bloglar";
+            ViewBag.v2 = "Blog Detayı ve Yorumlar";
+            return View();
+        }
     }
 }
