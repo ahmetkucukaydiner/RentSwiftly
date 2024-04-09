@@ -30,7 +30,10 @@ namespace RentSwiftly.Application.Features.Mediator.Handlers.BlogHandlers
                 CoverImageUrl = x.CoverImageUrl,
                 CreatedDate = x.CreatedDate,
                 Title = x.Title,
-                Description = x.Description
+                Description = x.Description,
+                AuthorDescription = x.Author.Description,
+                AuthorName = x.Author.Name,
+                AuthorImageUrl = x.Author.ImageUrl
             }).ToList();
         }
     }

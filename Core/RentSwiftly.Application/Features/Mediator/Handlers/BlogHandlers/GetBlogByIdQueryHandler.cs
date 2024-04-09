@@ -30,7 +30,8 @@ namespace RentSwiftly.Application.Features.Mediator.Handlers.BlogHandlers
                 AuthorID = value.AuthorID,
                 CategoryID = value.CategoryID,
                 CoverImageUrl = value.CoverImageUrl,
-                CreatedDate = value.CreatedDate
+                CreatedDate = value.CreatedDate,
+                Description = value.Description
             };
         }
     }
