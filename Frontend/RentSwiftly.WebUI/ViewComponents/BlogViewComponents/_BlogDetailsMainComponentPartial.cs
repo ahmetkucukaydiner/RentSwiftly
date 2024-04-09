@@ -2,7 +2,7 @@
 
 namespace RentSwiftly.WebUI.ViewComponents.BlogViewComponents
 {
-    public class _BlogDetailsComponentPartial : ViewComponent
+    public class _BlogDetailsMainComponentPartial : ViewComponent
     {
         public IViewComponentResult Invoke()
         {
