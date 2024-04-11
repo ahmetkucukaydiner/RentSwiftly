@@ -53,14 +53,14 @@ namespace RentSwiftly.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> CarsList()
         {
-            var values = _getCarQueryHandler.Handle();
+            var values = await _getCarQueryHandler.Handle();
             return Ok(values);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCar(int id)
         {
-            var value = _getCarByIdQueryHandler.Handle(new GetCarByIdQuery(id));
+            var value = await _getCarByIdQueryHandler.Handle(new GetCarByIdQuery(id));
             return Ok(value);
         }
 
