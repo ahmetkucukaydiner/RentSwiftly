@@ -36,7 +36,7 @@ namespace RentSwiftly.WebApi.Controllers
             return Ok("Yeni araç eklendi.");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCar(int id)
         {
             await _deleteCarCommandHandler.Handle(new DeleteCarCommand(id));
