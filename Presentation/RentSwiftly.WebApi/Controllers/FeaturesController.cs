@@ -24,7 +24,7 @@ namespace RentSwiftly.WebApi.Controllers
             return Ok("Yeni özellik eklendi.");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFeature(int id)
         {
             await _mediator.Send(new DeleteFeatureCommand(id));
