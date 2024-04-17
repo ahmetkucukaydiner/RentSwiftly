@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\RentSwiftly.Domain\RentSwiftly.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

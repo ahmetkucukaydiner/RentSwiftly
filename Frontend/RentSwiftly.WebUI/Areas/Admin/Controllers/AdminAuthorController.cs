@@ -1,50 +1,50 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using RentSwiftly.Dto.BannerDtos;
+using RentSwiftly.Dto.AuthorDtos;
 using System.Text;
 
 namespace RentSwiftly.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("Admin/AdminBanner")]
-    public class AdminBannerController : Controller
+    [Route("Admin/AdminAuthor")]
+    public class AdminAuthorController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public AdminBannerController(IHttpClientFactory httpClientFactory)
+        public AdminAuthorController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
-        [Route("")]
+
         [Route("Index")]
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7000/api/banners");
+            var responseMessage = await client.GetAsync("https://localhost:7000/api/authors");
             if(responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultBannerDto>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<ResultAuthorDto>>(jsonData);
                 return View(values);
             }
             return View();
         }
 
         [HttpGet]
-        [Route("CreateBanner")]
-        public IActionResult CreateBanner()
+        [Route("CreateAuthor")]
+        public IActionResult CreateAuthor()
         {
             return View();
         }
 
         [HttpPost]
-        [Route("CreateBanner")]
-        public async Task<IActionResult> CreateBanner(CreateBannerDto createBannerDto)
+        [Route("CreateAuthor")]
+        public async Task<IActionResult> CreateAuthor(CreateAuthorDto createAuthorDto)
         {
             var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(createBannerDto);
+            var jsonData = JsonConvert.SerializeObject(createAuthorDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7000/api/banners", stringContent);
+            var responseMessage = await client.PostAsync("https://localhost:7000/api/authors", stringContent);
             if(responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -52,11 +52,11 @@ namespace RentSwiftly.WebUI.Areas.Admin.Controllers
             return View();
         }
 
-        [Route("DeleteBanner/{id}")]
-        public async Task<IActionResult> DeleteBanner(int id)
+        [Route("DeleteAuthor/{id}")]
+        public async Task<IActionResult> DeleteAuthor(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync("https://localhost:7000/api/banners?id=" + id);
+            var responseMessage = await client.DeleteAsync("https://localhost:7000/api/authors?id=" + id);
             if(responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -65,28 +65,28 @@ namespace RentSwiftly.WebUI.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        [Route("UpdateBanner/{id}")]
-        public async Task<IActionResult> UpdateBanner(int id)
+        [Route("UpdateAuthor/{id}")]
+        public async Task<IActionResult> UpdateAuthor(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7000/api/banners/{id}");
+            var responseMessage = await client.GetAsync($"https://localhost:7000/api/authors/{id}");
             if(responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var value = JsonConvert.DeserializeObject<UpdateBannerDto>(jsonData);
+                var value = JsonConvert.DeserializeObject<UpdateAuthorDto>(jsonData);
                 return View(value);
             }
             return View();
         }
 
         [HttpPost]
-        [Route("UpdateBanner/{id}")]
-        public async Task<IActionResult> UpdateBanner(UpdateBannerDto updateBannerDto)
+        [Route("UpdateAuthor/{id}")]
+        public async Task<IActionResult> UpdateAuthor(UpdateAuthorDto updateAuthorDto)
         {
             var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(updateBannerDto);
+            var jsonData = JsonConvert.SerializeObject(updateAuthorDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("https://localhost:7000/api/banners/", stringContent);
+            var responseMessage = await client.PutAsync("https://localhost:7000/api/authors", stringContent);
             if(responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
