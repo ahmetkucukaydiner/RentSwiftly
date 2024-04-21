@@ -1,0 +1,25 @@
+﻿@model CreateCategoryDto
+
+@{
+    ViewData["Title"] = "CreateCategory";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Yeni Blog Kategorisi Girişi</h4>
+                <p class="card-subtitle mb-4">Web sitenizin blog sayfası için yeni kategori tanımlayabilirisiniz. Veri girişinden sonra ekle butonuna tıklayarak işlemi tamamlayabilirsiniz.</p>
+                <form method="post">
+                    <div class="form-group">
+                        <label for="exampleInputName">Kategori Adı</label>
+                        <input type="text" class="form-control" asp-for="Name" id="exampleInputName" placeholder="Kategori adı girişi yapınız.">
+                    </div>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Yeni Kategori Ekle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

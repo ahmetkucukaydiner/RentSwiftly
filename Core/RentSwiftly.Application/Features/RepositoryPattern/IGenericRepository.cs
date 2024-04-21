@@ -13,5 +13,6 @@ namespace RentSwiftly.Application.Features.RepositoryPattern
         void Create(T entity);
         void Update(T entity);
         void Delete(T entity);
+        List<T> GetCommentsByBlogId(int id);
     }
 }

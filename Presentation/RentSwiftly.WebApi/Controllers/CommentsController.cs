@@ -51,5 +51,12 @@ namespace RentSwiftly.WebApi.Controllers
             var value = _commentRepository.GetById(id);
             return Ok(value);
         }
+
+        [HttpGet("CommentListByBlog")]
+        public IActionResult CommentListByBlog(int id)
+        {
+            var values = _commentRepository.GetCommentsByBlogId(id);
+            return Ok(values);
+        }
     }
 }
