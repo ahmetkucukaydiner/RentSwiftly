@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RentSwiftly.Application.Features.CQRS.Commands.CarCommands;
 using RentSwiftly.Application.Features.CQRS.Handlers.CarHandlers;
 using RentSwiftly.Application.Features.CQRS.Queries.CarQueries;
+using RentSwiftly.Application.Features.Mediator.Queries.StatisticsQueries;
 
 namespace RentSwiftly.WebApi.Controllers
 {
@@ -76,6 +78,6 @@ namespace RentSwiftly.WebApi.Controllers
         {
             var values = _getLast5CarsWithBrandQueryHandler.Handle();
             return Ok(values);
-        }
+        }        
     }
 }
