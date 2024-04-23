@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using RentSwiftly.Dto.LocationDtos;
+using RentSwiftly.Dto.TestimonialDtos;
 using System.Text;
 
 namespace RentSwiftly.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("Admin/AdminLocation")]
-    public class AdminLocationController : Controller
+    [Route("Admin/AdminTestimonial")]
+    public class AdminTestimonialController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public AdminLocationController(IHttpClientFactory httpClientFactory)
+        public AdminTestimonialController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
@@ -20,31 +20,31 @@ namespace RentSwiftly.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7000/api/Locations");
+            var responseMessage = await client.GetAsync("https://localhost:7000/api/Testimonials");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultLocationDto>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<ResultTestimonialDto>>(jsonData);
                 return View(values);
             }
             return View();
         }
 
         [HttpGet]
-        [Route("CreateLocation")]
-        public IActionResult CreateLocation()
+        [Route("CreateTestimonial")]
+        public IActionResult CreateTestimonial()
         {
             return View();
         }
 
         [HttpPost]
-        [Route("CreateLocation")]
-        public async Task<IActionResult> CreateLocation(CreateLocationDto createLocationDto)
+        [Route("CreateTestimonial")]
+        public async Task<IActionResult> CreateTestimonial(CreateTestimonialDto createTestimonialDto)
         {
             var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(createLocationDto);
+            var jsonData = JsonConvert.SerializeObject(createTestimonialDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7000/api/Locations", stringContent);
+            var responseMessage = await client.PostAsync("https://localhost:7000/api/Testimonials", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -52,11 +52,11 @@ namespace RentSwiftly.WebUI.Areas.Admin.Controllers
             return View();
         }
 
-        [Route("DeleteLocation/{id}")]
-        public async Task<IActionResult> DeleteLocation(int id)
+        [Route("DeleteTestimonial/{id}")]
+        public async Task<IActionResult> DeleteTestimonial(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync("https://localhost:7000/api/Locations?id=" + id);
+            var responseMessage = await client.DeleteAsync("https://localhost:7000/api/Testimonials?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -65,28 +65,28 @@ namespace RentSwiftly.WebUI.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        [Route("UpdateLocation/{id}")]
-        public async Task<IActionResult> UpdateLocation(int id)
+        [Route("UpdateTestimonial/{id}")]
+        public async Task<IActionResult> UpdateTestimonial(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7000/api/Locations/{id}");
+            var responseMessage = await client.GetAsync($"https://localhost:7000/api/Testimonials/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var value = JsonConvert.DeserializeObject<UpdateLocationDto>(jsonData);
+                var value = JsonConvert.DeserializeObject<UpdateTestimonialDto>(jsonData);
                 return View(value);
             }
             return View();
         }
 
         [HttpPost]
-        [Route("UpdateLocation/{id}")]
-        public async Task<IActionResult> UpdateLocation(UpdateLocationDto updateLocationDto)
+        [Route("UpdateTestimonial/{id}")]
+        public async Task<IActionResult> UpdateTestimonial(UpdateTestimonialDto updateTestimonialDto)
         {
             var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(updateLocationDto);
+            var jsonData = JsonConvert.SerializeObject(updateTestimonialDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("https://localhost:7000/api/Locations/", stringContent);
+            var responseMessage = await client.PutAsync("https://localhost:7000/api/Testimonials/", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");

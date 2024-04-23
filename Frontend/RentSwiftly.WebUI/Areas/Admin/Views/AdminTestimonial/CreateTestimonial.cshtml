@@ -1,0 +1,36 @@
+﻿@model CreateTestimonialDto
+
+@{
+    ViewData["Title"] = "CreateTestimonial";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Yeni Referans Veri Girişi Alanı</h4>
+                <p class="card-subtitle mb-4">Referans ekleme işleminin yapıldığını sayfamızdır. Bilgileri eksiksiz olarak doldurup kaydet butonuna tıklamanız gereklidir.</p>
+                <form method="post">
+                    <div class="form-group">
+                        <label for="exampleInputName">Referans Adı Soyadı</label>
+                        <input type="text" class="form-control" asp-for="Name" id="exampleInputName" placeholder="Referans adını ve soyadını giriniz.">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputTitle">Referans Ünvanı</label>
+                        <input type="text" class="form-control" asp-for="Title" id="exampleInputTitle" placeholder="Referans ünvanını giriniz.">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputImageUrl">Referans Görsel Linki</label>
+                        <input type="text" class="form-control" asp-for="ImageUrl" id="exampleInputImageUrl" placeholder="Referans görsel linkini giriniz.">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputComment">Referans Yorumu</label>                        
+                        <textarea rows="5" asp-for="Comment" class="form-control" placeholder="Referans yorumunu giriniz." id="exampleInputComment"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Referansı Ekle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
