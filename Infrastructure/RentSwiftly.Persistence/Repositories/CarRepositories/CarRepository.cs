@@ -17,13 +17,7 @@ public class CarRepository : ICarRepository
     public CarRepository(RentSwiftlyContext context)
     {
         _context = context;
-    }
-
-    public int GetCarCount()
-    {
-        var value = _context.Cars.Count();
-        return value;
-    }
+    }    
 
     public List<Car> GetCarsListWithBrands()
     {

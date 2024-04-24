@@ -9,6 +9,7 @@ using RentSwiftly.Application.Interfaces;
 using RentSwiftly.Application.Interfaces.BlogInterfaces;
 using RentSwiftly.Application.Interfaces.CarInterfaces;
 using RentSwiftly.Application.Interfaces.CarPricingInterfaces;
+using RentSwiftly.Application.Interfaces.StatisticsInterfaces;
 using RentSwiftly.Application.Interfaces.TagCloudInterfaces;
 using RentSwiftly.Application.Services;
 using RentSwiftly.Domain.Entities;
@@ -18,6 +19,7 @@ using RentSwiftly.Persistence.Repositories.BlogRepositories;
 using RentSwiftly.Persistence.Repositories.CarPricingRepositories;
 using RentSwiftly.Persistence.Repositories.CarRepositories;
 using RentSwiftly.Persistence.Repositories.CommentRepositories;
+using RentSwiftly.Persistence.Repositories.StatisticsRepositories;
 using RentSwiftly.Persistence.Repositories.TagCloudRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +31,7 @@ builder.Services.AddScoped(typeof(ICarRepository), typeof(CarRepository));
 builder.Services.AddScoped(typeof(IBlogRepository), typeof(BlogRepository));
 builder.Services.AddScoped(typeof(ICarPricingRepository), typeof(CarPricingRepository));
 builder.Services.AddScoped(typeof(ITagCloudRepository), typeof(TagCloudRepository));
+builder.Services.AddScoped(typeof(IStatisticsRepository), typeof(StatisticsRepository));
 builder.Services.AddScoped(typeof(IGenericRepository<Comment>), typeof(CommentRepository));
 
 builder.Services.AddScoped<GetAboutQueryHandler>();

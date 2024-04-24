@@ -1,10 +1,7 @@
 ﻿using MediatR;
 using RentSwiftly.Application.Features.Mediator.Queries.StatisticsQueries;
 using RentSwiftly.Application.Features.Mediator.Results.StatisticsResults;
-using RentSwiftly.Application.Interfaces;
-using RentSwiftly.Application.Interfaces.CarInterfaces;
 using RentSwiftly.Application.Interfaces.StatisticsInterfaces;
-using RentSwiftly.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,21 +10,21 @@ using System.Threading.Tasks;
 
 namespace RentSwiftly.Application.Features.Mediator.Handlers.StatisticsHandlers
 {
-    public class GetCarCountQueryHandler : IRequestHandler<GetCarCountQuery, GetCarCountQueryResult>
+    public class GetBlogCountQueryHandler : IRequestHandler<GetBlogCountQuery, GetBlogCountQueryResult>
     {
         private readonly IStatisticsRepository _repository;
 
-        public GetCarCountQueryHandler(IStatisticsRepository repository)
+        public GetBlogCountQueryHandler(IStatisticsRepository repository)
         {
             _repository = repository;
         }
 
-        public async Task<GetCarCountQueryResult> Handle(GetCarCountQuery request, CancellationToken cancellationToken)
+        public async Task<GetBlogCountQueryResult> Handle(GetBlogCountQuery request, CancellationToken cancellationToken)
         {
-            var value = _repository.GetCarCount();
-            return new GetCarCountQueryResult
+            var value = _repository.GetBlogCount();
+            return new GetBlogCountQueryResult
             {
-                CarCount = value,
+                BlogCount = value
             };
         }
     }

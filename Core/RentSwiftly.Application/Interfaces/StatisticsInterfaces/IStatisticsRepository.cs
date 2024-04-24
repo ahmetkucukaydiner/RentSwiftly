@@ -8,16 +8,17 @@ namespace RentSwiftly.Application.Interfaces.StatisticsInterfaces
 {
     public interface IStatisticsRepository
     {
+        int GetCarCount();
         int GetLocationCount();
         int GetAuthorCount();
         int GetBlogCount();
         int GetBrandCount();
-        double GetAverageRentPriceForDaily();
-        double GetWeeklyRentPriceForDaily();
-        double GetMonthlyRentPriceForDaily();
+        decimal GetAverageRentPriceForDaily();
+        decimal GetAverageRentPriceForWeekly();
+        decimal GetAverageRentPriceForMonthly();
         int GetCarCountByTransmissionIsAuto();
-        string BrandNameByMaxCar();
-        string BlogTitleByMaxBlogComment();
+        string GetBrandNameByMaxCar();
+        string GetBlogTitleByMaxBlogComment();
         int GetCarCountByKilometerLowerThan1000();
         int GetCarCountByFuelGasolineOrDiesel();
         int GetCarCountByFuelElectric();
