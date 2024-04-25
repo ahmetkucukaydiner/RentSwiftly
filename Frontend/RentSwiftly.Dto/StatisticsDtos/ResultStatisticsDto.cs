@@ -22,7 +22,7 @@ namespace RentSwiftly.Dto.StatisticsDtos
         public int CarCountByKilometerLowerThan1000 { get; set; }
         public int CarCountByFuelGasolineOrDiesel { get; set; }
         public int CarCountByFuelElectric { get; set; }
-        public decimal CarBrandAndModelByRentPriceDailyMax { get; set; }
-        public decimal CarBrandAndModelByRentPriceDailyMin { get; set; }
+        public string CarBrandAndModelByRentPriceDailyMax { get; set; }
+        public string CarBrandAndModelByRentPriceDailyMin { get; set; }
     }
 }
