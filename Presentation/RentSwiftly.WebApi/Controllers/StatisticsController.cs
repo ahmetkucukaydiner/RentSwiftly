@@ -100,7 +100,7 @@ namespace RentSwiftly.WebApi.Controllers
             return Ok(value);
         }
 
-        [HttpGet("GetGetCarCountByFuelGasolineOrDieselCarCount")]
+        [HttpGet("GetCarCountByFuelGasolineOrDiesel")]
         public async Task<IActionResult> GetCarCountByFuelGasolineOrDiesel()
         {
             var value = await _mediator.Send(new GetCarCountByFuelGasolineOrDieselQuery());

@@ -36,8 +36,8 @@ namespace RentSwiftly.Persistence.Repositories.StatisticsRepositories
 
         public decimal GetAverageRentPriceForDaily()
         {
-            var id = _context.Pricings.Where(x => x.Name == "Günlük").Select(z => z.PricingID).FirstOrDefault(); 
-            var value = _context.CarPricings.Where(w=>w.PricingID == id).Average(y=>y.Amount);
+            var id = _context.Pricings.Where(x => x.Name == "Günlük").Select(z => z.PricingID).FirstOrDefault();
+            var value = _context.CarPricings.Where(w => w.PricingID == id).Average(y => y.Amount);
             return value;
         }
 

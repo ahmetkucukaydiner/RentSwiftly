@@ -21,7 +21,7 @@ namespace RentSwiftly.Application.Features.Mediator.Handlers.StatisticsHandlers
 
         public async Task<GetAverageRentPriceForDailyQueryResult> Handle(GetAverageRentPriceForDailyQuery request, CancellationToken cancellationToken)
         {
-            var value = _repository.GetBlogCount();
+            var value = _repository.GetAverageRentPriceForDaily();
             return new GetAverageRentPriceForDailyQueryResult
             {
                 AverageRentPriceForDaily = value
