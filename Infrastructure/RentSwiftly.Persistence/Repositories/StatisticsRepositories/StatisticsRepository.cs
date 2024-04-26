@@ -20,12 +20,29 @@ namespace RentSwiftly.Persistence.Repositories.StatisticsRepositories
 
         public string GetBlogTitleByMaxBlogComment()
         {
-            throw new NotImplementedException();
+            var commentValues = _context.Comments.GroupBy(x => x.BlogID)
+                .Select(y => new
+                {
+                    BlogID = y.Key,
+                    Count = y.Count()
+                }).OrderByDescending(z=>z.Count).Take(1).FirstOrDefault();
+
+            string blogName = _context.Blogs.Where(x => x.BlogID == commentValues.BlogID).Select(y => y.Title).FirstOrDefault();
+
+            return blogName;
         }
 
         public string GetBrandNameByMaxCar()
         {
-            throw new NotImplementedException();
+            var brandValue = _context.Cars.GroupBy(x => x.BrandID).Select(y => new
+            {
+                BrandID = y.Key,
+                Count = y.Count()
+            }).OrderByDescending(z => z.Count).Take(1).FirstOrDefault();
+
+            string brandName = _context.Brands.Where(x=>x.BrandId == brandValue.BrandID).Select(y=>y.Name).FirstOrDefault();
+
+            return brandName;
         }
 
         public int GetAuthorCount()
