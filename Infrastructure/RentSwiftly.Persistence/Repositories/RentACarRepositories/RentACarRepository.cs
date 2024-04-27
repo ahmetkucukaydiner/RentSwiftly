@@ -1,4 +1,5 @@
-﻿using RentSwiftly.Application.Interfaces.RentACarInterfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using RentSwiftly.Application.Interfaces.RentACarInterfaces;
 using RentSwiftly.Domain.Entities;
 using RentSwiftly.Persistence.Context;
 using System;
@@ -19,10 +20,10 @@ namespace RentSwiftly.Persistence.Repositories.RentACarRepositories
             _context = context;
         }
 
-        public List<RentACar> GetByFilterAsync(Expression<Func<RentACar, bool>> filter)
+        public async Task<List<RentACar>> GetByFilterAsync(Expression<Func<RentACar, bool>> filter)
         {
-            var values = _context.RentACars.Where(filter);
-            return values.ToList();
+            var values = await _context.RentACars.Where(filter).ToListAsync();
+            return values;
         }
     }
 }

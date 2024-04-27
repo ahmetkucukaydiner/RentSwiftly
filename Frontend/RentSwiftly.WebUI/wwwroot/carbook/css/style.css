@@ -1588,6 +1588,10 @@ pre {
   .table-responsive > .table-bordered {
     border: 0; }
 
+  .form-control option{
+    color: black
+  }
+
 .form-control {
   display: block;
   width: 100%;
