@@ -32,9 +32,14 @@ namespace RentSwiftly.WebUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(string id)
+        public async Task<IActionResult> Index(string book_pick_date, string book_off_date, string time_pick, string time_off, string locationID)
         {
-
+            TempData["bookPickDate"] = book_pick_date;
+            TempData["bookOffDate"] = book_off_date;
+            TempData["timePick"] = time_pick;
+            TempData["timeOff"] = time_off;
+            TempData["locationID"] = locationID;
+            return RedirectToAction("Index", "RentACarList");
         }
     }
 }

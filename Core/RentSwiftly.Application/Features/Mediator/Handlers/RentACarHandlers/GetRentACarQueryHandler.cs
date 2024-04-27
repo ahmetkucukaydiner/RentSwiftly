@@ -24,7 +24,10 @@ namespace RentSwiftly.Application.Features.Mediator.Handlers.RentACarHandlers
             var values = await _repository.GetByFilterAsync(x=>x.LocationID == request.LocationID && x.IsAvailable == true);
             return values.Select(x => new GetRentACarQueryResult
             {
-                CarID = x.CarID
+                CarID = x.CarID,
+                Brand = x.Car.Brand.Name,
+                Model = x.Car.Model,
+                CoverImageUrl = x.Car.CoverImageUrl
             }).ToList();
         }
     }
