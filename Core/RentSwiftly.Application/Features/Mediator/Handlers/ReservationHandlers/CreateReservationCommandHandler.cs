@@ -33,6 +33,7 @@ namespace RentSwiftly.Application.Features.Mediator.Handlers.ReservationHandlers
                 PhoneNumber = request.PhoneNumber,
                 PickUpLocationID = request.PickUpLocationID,
                 Surname = request.Surname,
+                Status = "Rezervasyon Alındı"
             });
         }
     }
