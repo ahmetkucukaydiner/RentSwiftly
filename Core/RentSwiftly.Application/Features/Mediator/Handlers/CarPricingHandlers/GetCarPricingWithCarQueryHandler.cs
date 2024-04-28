@@ -24,6 +24,7 @@ namespace RentSwiftly.Application.Features.Mediator.Handlers.GetCarPricingHandle
             var values = _repository.GetCarPricingWithCars();
             return values.Select(x => new GetCarPricingWithCarQueryResult
             {
+                CarId = x.CarID,
                 Amount = x.Amount,
                 Brand = x.Car.Brand.Name,
                 CarPricingId = x.CarPricingID,
