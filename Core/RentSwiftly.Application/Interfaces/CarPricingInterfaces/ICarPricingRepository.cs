@@ -1,4 +1,5 @@
-﻿using RentSwiftly.Domain.Entities;
+﻿using RentSwiftly.Application.Models;
+using RentSwiftly.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace RentSwiftly.Application.Interfaces.CarPricingInterfaces
     public interface ICarPricingRepository
     {
         List<CarPricing> GetCarPricingWithCars();
+        List<CarPricingModel> GetCarPricingWithTimePeriod();
     }
 }

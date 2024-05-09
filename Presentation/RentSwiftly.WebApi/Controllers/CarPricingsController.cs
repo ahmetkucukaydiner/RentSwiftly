@@ -22,5 +22,5 @@ namespace RentSwiftly.WebApi.Controllers
             var values = await _mediator.Send(new GetCarPricingWithCarQuery());
             return Ok(values);
         }
-    }
+	}
 }
