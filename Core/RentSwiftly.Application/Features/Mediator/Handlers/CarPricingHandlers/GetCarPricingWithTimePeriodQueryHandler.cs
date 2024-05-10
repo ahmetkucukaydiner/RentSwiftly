@@ -1,13 +1,7 @@
 ﻿using MediatR;
 using RentSwiftly.Application.Features.Mediator.Queries.CarPricingQueries;
 using RentSwiftly.Application.Features.Mediator.Results.CarPricingResults;
-using RentSwiftly.Application.Interfaces;
 using RentSwiftly.Application.Interfaces.CarPricingInterfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RentSwiftly.Application.Features.Mediator.Handlers.CarPricingHandlers
 {
@@ -22,7 +16,16 @@ namespace RentSwiftly.Application.Features.Mediator.Handlers.CarPricingHandlers
 
 		public async Task<List<GetCarPricingWithTimePeriodQueryResult>> Handle(GetCarPricingWithTimePeriodQuery request, CancellationToken cancellationToken)
 		{
-			
+			var values = _carPricingRepository.GetCarPricingWithTimePeriod();
+			return values.Select(x => new GetCarPricingWithTimePeriodQueryResult
+			{
+				BrandName = x.BrandName,
+				Model = x.Model,
+				CoverImageUrl = x.CoverImageUrl,
+				DailyAmount = x.Amounts[0],
+				WeeklyAmount = x.Amounts[1],
+				MonthlyAmount = x.Amounts[2]
+			}).ToList();
 		}
 	}
 }

@@ -1,6 +1,6 @@
-﻿namespace RentSwiftly.Application.Features.Mediator.Results.CarPricingResults
+﻿namespace RentSwiftly.Dto.CarPricingDtos
 {
-	public class GetCarPricingWithTimePeriodQueryResult
+	public class ResultCarPricingListWithModelDto
 	{
 		public string BrandName { get; set; }
 		public string Model { get; set; }

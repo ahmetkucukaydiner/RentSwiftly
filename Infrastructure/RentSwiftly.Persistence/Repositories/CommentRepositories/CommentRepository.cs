@@ -1,12 +1,6 @@
 ﻿using RentSwiftly.Application.Features.RepositoryPattern;
 using RentSwiftly.Domain.Entities;
 using RentSwiftly.Persistence.Context;
-using RentSwiftly.Persistence.Migrations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RentSwiftly.Persistence.Repositories.CommentRepositories
 {
@@ -34,7 +28,7 @@ namespace RentSwiftly.Persistence.Repositories.CommentRepositories
 
         public List<Comment> GetAll()
         {
-            return _context.Comments.Select(x=> new Comment
+            return _context.Comments.Select(x => new Comment
             {
                 CommentID = x.CommentID,
                 BlogID = x.BlogID,
@@ -52,7 +46,7 @@ namespace RentSwiftly.Persistence.Repositories.CommentRepositories
 
         public List<Comment> GetCommentsByBlogId(int id)
         {
-            return _context.Set<Comment>().Where(x=>x.BlogID == id).ToList();
+            return _context.Set<Comment>().Where(x => x.BlogID == id).ToList();
         }
 
         public void Update(Comment entity)

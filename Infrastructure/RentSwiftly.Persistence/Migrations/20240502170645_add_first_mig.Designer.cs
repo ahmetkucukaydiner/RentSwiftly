@@ -12,8 +12,8 @@ using RentSwiftly.Persistence.Context;
 namespace RentSwiftly.Persistence.Migrations
 {
     [DbContext(typeof(RentSwiftlyContext))]
-    [Migration("20240426183432_mig_add_RentACarTable")]
-    partial class mig_add_RentACarTable
+    [Migration("20240502170645_add_first_mig")]
+    partial class add_first_mig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -362,6 +362,31 @@ namespace RentSwiftly.Persistence.Migrations
                     b.ToTable("Contacts");
                 });
 
+            modelBuilder.Entity("RentSwiftly.Domain.Entities.Customer", b =>
+                {
+                    b.Property<int>("CustomerID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerID"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CustomerID");
+
+                    b.ToTable("Customer");
+                });
+
             modelBuilder.Entity("RentSwiftly.Domain.Entities.Feature", b =>
                 {
                     b.Property<int>("FeatureID")
@@ -459,9 +484,6 @@ namespace RentSwiftly.Persistence.Migrations
                     b.Property<int>("LocationID")
                         .HasColumnType("int");
 
-                    b.Property<int>("PickUpLocationID")
-                        .HasColumnType("int");
-
                     b.HasKey("RentACarID");
 
                     b.HasIndex("CarID");
@@ -469,6 +491,115 @@ namespace RentSwiftly.Persistence.Migrations
                     b.HasIndex("LocationID");
 
                     b.ToTable("RentACars");
+                });
+
+            modelBuilder.Entity("RentSwiftly.Domain.Entities.RentACarProsess", b =>
+                {
+                    b.Property<int>("RentACarProsessID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RentACarProsessID"));
+
+                    b.Property<int>("CarID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DropOffDate")
+                        .HasColumnType("Date");
+
+                    b.Property<string>("DropOffDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DropOffLocation")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("DropOffTime")
+                        .HasColumnType("time");
+
+                    b.Property<DateTime>("PickUpDate")
+                        .HasColumnType("Date");
+
+                    b.Property<string>("PickUpDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PickUpLocation")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("PickUpTime")
+                        .HasColumnType("time");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("RentACarProsessID");
+
+                    b.HasIndex("CarID");
+
+                    b.HasIndex("CustomerID");
+
+                    b.ToTable("RentACarProsess");
+                });
+
+            modelBuilder.Entity("RentSwiftly.Domain.Entities.Reservation", b =>
+                {
+                    b.Property<int>("ReservationID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationID"));
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CarID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DriverLicenseYear")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DropOffLocationID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PickUpLocationID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ReservationID");
+
+                    b.HasIndex("CarID");
+
+                    b.HasIndex("DropOffLocationID");
+
+                    b.HasIndex("PickUpLocationID");
+
+                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("RentSwiftly.Domain.Entities.Service", b =>
@@ -681,6 +812,48 @@ namespace RentSwiftly.Persistence.Migrations
                     b.Navigation("Location");
                 });
 
+            modelBuilder.Entity("RentSwiftly.Domain.Entities.RentACarProsess", b =>
+                {
+                    b.HasOne("RentSwiftly.Domain.Entities.Car", "Car")
+                        .WithMany("RentACarProsesses")
+                        .HasForeignKey("CarID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RentSwiftly.Domain.Entities.Customer", "Customer")
+                        .WithMany("RentACarProsesses")
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("RentSwiftly.Domain.Entities.Reservation", b =>
+                {
+                    b.HasOne("RentSwiftly.Domain.Entities.Car", "Car")
+                        .WithMany("Reservations")
+                        .HasForeignKey("CarID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RentSwiftly.Domain.Entities.Location", "DropOffLocation")
+                        .WithMany("DropOffReservation")
+                        .HasForeignKey("DropOffLocationID");
+
+                    b.HasOne("RentSwiftly.Domain.Entities.Location", "PickUpLocation")
+                        .WithMany("PickUpReservation")
+                        .HasForeignKey("PickUpLocationID");
+
+                    b.Navigation("Car");
+
+                    b.Navigation("DropOffLocation");
+
+                    b.Navigation("PickUpLocation");
+                });
+
             modelBuilder.Entity("RentSwiftly.Domain.Entities.TagCloud", b =>
                 {
                     b.HasOne("RentSwiftly.Domain.Entities.Blog", "Blog")
@@ -717,12 +890,21 @@ namespace RentSwiftly.Persistence.Migrations
 
                     b.Navigation("CarPricings");
 
+                    b.Navigation("RentACarProsesses");
+
                     b.Navigation("RentACars");
+
+                    b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("RentSwiftly.Domain.Entities.Category", b =>
                 {
                     b.Navigation("Blogs");
+                });
+
+            modelBuilder.Entity("RentSwiftly.Domain.Entities.Customer", b =>
+                {
+                    b.Navigation("RentACarProsesses");
                 });
 
             modelBuilder.Entity("RentSwiftly.Domain.Entities.Feature", b =>
@@ -732,6 +914,10 @@ namespace RentSwiftly.Persistence.Migrations
 
             modelBuilder.Entity("RentSwiftly.Domain.Entities.Location", b =>
                 {
+                    b.Navigation("DropOffReservation");
+
+                    b.Navigation("PickUpReservation");
+
                     b.Navigation("RentACars");
                 });
 

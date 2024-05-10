@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RentSwiftly.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class first_mig : Migration
+    public partial class add_first_mig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,6 +24,21 @@ namespace RentSwiftly.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Abouts", x => x.AboutID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Authors",
+                columns: table => new
+                {
+                    AuthorID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Authors", x => x.AuthorID);
                 });
 
             migrationBuilder.CreateTable(
@@ -83,6 +98,21 @@ namespace RentSwiftly.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contacts", x => x.ContactID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Customer",
+                columns: table => new
+                {
+                    CustomerID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customer", x => x.CustomerID);
                 });
 
             migrationBuilder.CreateTable(
@@ -214,6 +244,36 @@ namespace RentSwiftly.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Blogs",
+                columns: table => new
+                {
+                    BlogID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AuthorID = table.Column<int>(type: "int", nullable: false),
+                    CoverImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CategoryID = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Blogs", x => x.BlogID);
+                    table.ForeignKey(
+                        name: "FK_Blogs_Authors_AuthorID",
+                        column: x => x.AuthorID,
+                        principalTable: "Authors",
+                        principalColumn: "AuthorID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Blogs_Categories_CategoryID",
+                        column: x => x.CategoryID,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CarDescriptions",
                 columns: table => new
                 {
@@ -287,6 +347,160 @@ namespace RentSwiftly.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "RentACarProsess",
+                columns: table => new
+                {
+                    RentACarProsessID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CarID = table.Column<int>(type: "int", nullable: false),
+                    PickUpLocation = table.Column<int>(type: "int", nullable: false),
+                    DropOffLocation = table.Column<int>(type: "int", nullable: false),
+                    PickUpDate = table.Column<DateTime>(type: "Date", nullable: false),
+                    DropOffDate = table.Column<DateTime>(type: "Date", nullable: false),
+                    PickUpTime = table.Column<TimeSpan>(type: "time", nullable: false),
+                    DropOffTime = table.Column<TimeSpan>(type: "time", nullable: false),
+                    CustomerID = table.Column<int>(type: "int", nullable: false),
+                    PickUpDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DropOffDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RentACarProsess", x => x.RentACarProsessID);
+                    table.ForeignKey(
+                        name: "FK_RentACarProsess_Cars_CarID",
+                        column: x => x.CarID,
+                        principalTable: "Cars",
+                        principalColumn: "CarID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RentACarProsess_Customer_CustomerID",
+                        column: x => x.CustomerID,
+                        principalTable: "Customer",
+                        principalColumn: "CustomerID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RentACars",
+                columns: table => new
+                {
+                    RentACarID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LocationID = table.Column<int>(type: "int", nullable: false),
+                    CarID = table.Column<int>(type: "int", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RentACars", x => x.RentACarID);
+                    table.ForeignKey(
+                        name: "FK_RentACars_Cars_CarID",
+                        column: x => x.CarID,
+                        principalTable: "Cars",
+                        principalColumn: "CarID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RentACars_Locations_LocationID",
+                        column: x => x.LocationID,
+                        principalTable: "Locations",
+                        principalColumn: "LocationID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reservations",
+                columns: table => new
+                {
+                    ReservationID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PickUpLocationID = table.Column<int>(type: "int", nullable: true),
+                    DropOffLocationID = table.Column<int>(type: "int", nullable: true),
+                    CarID = table.Column<int>(type: "int", nullable: false),
+                    Age = table.Column<int>(type: "int", nullable: false),
+                    DriverLicenseYear = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reservations", x => x.ReservationID);
+                    table.ForeignKey(
+                        name: "FK_Reservations_Cars_CarID",
+                        column: x => x.CarID,
+                        principalTable: "Cars",
+                        principalColumn: "CarID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Reservations_Locations_DropOffLocationID",
+                        column: x => x.DropOffLocationID,
+                        principalTable: "Locations",
+                        principalColumn: "LocationID");
+                    table.ForeignKey(
+                        name: "FK_Reservations_Locations_PickUpLocationID",
+                        column: x => x.PickUpLocationID,
+                        principalTable: "Locations",
+                        principalColumn: "LocationID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    CommentID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BlogID = table.Column<int>(type: "int", nullable: false),
+                    UserImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.CommentID);
+                    table.ForeignKey(
+                        name: "FK_Comments_Blogs_BlogID",
+                        column: x => x.BlogID,
+                        principalTable: "Blogs",
+                        principalColumn: "BlogID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TagClouds",
+                columns: table => new
+                {
+                    TagCloudID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BlogID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TagClouds", x => x.TagCloudID);
+                    table.ForeignKey(
+                        name: "FK_TagClouds_Blogs_BlogID",
+                        column: x => x.BlogID,
+                        principalTable: "Blogs",
+                        principalColumn: "BlogID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Blogs_AuthorID",
+                table: "Blogs",
+                column: "AuthorID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Blogs_CategoryID",
+                table: "Blogs",
+                column: "CategoryID");
+
             migrationBuilder.CreateIndex(
                 name: "IX_CarDescriptions_CarID",
                 table: "CarDescriptions",
@@ -316,6 +530,51 @@ namespace RentSwiftly.Persistence.Migrations
                 name: "IX_Cars_BrandID",
                 table: "Cars",
                 column: "BrandID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_BlogID",
+                table: "Comments",
+                column: "BlogID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RentACarProsess_CarID",
+                table: "RentACarProsess",
+                column: "CarID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RentACarProsess_CustomerID",
+                table: "RentACarProsess",
+                column: "CustomerID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RentACars_CarID",
+                table: "RentACars",
+                column: "CarID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RentACars_LocationID",
+                table: "RentACars",
+                column: "LocationID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reservations_CarID",
+                table: "Reservations",
+                column: "CarID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reservations_DropOffLocationID",
+                table: "Reservations",
+                column: "DropOffLocationID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reservations_PickUpLocationID",
+                table: "Reservations",
+                column: "PickUpLocationID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TagClouds_BlogID",
+                table: "TagClouds",
+                column: "BlogID");
         }
 
         /// <inheritdoc />
@@ -337,7 +596,7 @@ namespace RentSwiftly.Persistence.Migrations
                 name: "CarPricings");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "Contacts");
@@ -346,7 +605,13 @@ namespace RentSwiftly.Persistence.Migrations
                 name: "FooterAddresses");
 
             migrationBuilder.DropTable(
-                name: "Locations");
+                name: "RentACarProsess");
+
+            migrationBuilder.DropTable(
+                name: "RentACars");
+
+            migrationBuilder.DropTable(
+                name: "Reservations");
 
             migrationBuilder.DropTable(
                 name: "Services");
@@ -355,19 +620,37 @@ namespace RentSwiftly.Persistence.Migrations
                 name: "SocialMedias");
 
             migrationBuilder.DropTable(
+                name: "TagClouds");
+
+            migrationBuilder.DropTable(
                 name: "Testimonials");
 
             migrationBuilder.DropTable(
                 name: "Features");
 
             migrationBuilder.DropTable(
-                name: "Cars");
-
-            migrationBuilder.DropTable(
                 name: "Pricings");
 
             migrationBuilder.DropTable(
+                name: "Customer");
+
+            migrationBuilder.DropTable(
+                name: "Cars");
+
+            migrationBuilder.DropTable(
+                name: "Locations");
+
+            migrationBuilder.DropTable(
+                name: "Blogs");
+
+            migrationBuilder.DropTable(
                 name: "Brands");
+
+            migrationBuilder.DropTable(
+                name: "Authors");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }
