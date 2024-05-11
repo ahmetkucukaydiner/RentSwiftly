@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RentSwiftly.Domain.Entities
+﻿namespace RentSwiftly.Domain.Entities
 {
     public class Comment
     {
@@ -14,6 +8,7 @@ namespace RentSwiftly.Domain.Entities
         public string Description { get; set; }
         public int BlogID { get; set; }
         public Blog Blog { get; set; }
-        public string UserImageUrl { get; set; }
+        public string? UserImageUrl { get; set; }
+        public string Email { get; set; }
     }
 }

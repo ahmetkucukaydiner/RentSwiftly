@@ -22,7 +22,8 @@ namespace RentSwiftly.Application.Features.Mediator.Handlers.CommentHandlers
                 BlogID = request.BlogId,
                 CreatedDate = DateTime.Parse(DateTime.Now.ToShortDateString()),
                 Name = request.Name,
-                UserImageUrl = "asd"
+                UserImageUrl = "asd",
+                Email = request.Email
             });
         }
     }
