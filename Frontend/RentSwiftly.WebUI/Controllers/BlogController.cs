@@ -19,7 +19,7 @@ namespace RentSwiftly.WebUI.Controllers
             ViewBag.v2 = "Yazarlarımızın Blogları";
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7000/api/Blogs/GetAllBlogsWithAuthor");
-            if(responseMessage.IsSuccessStatusCode)
+            if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultAllBlogsWithAuthorDto>>(jsonData);
@@ -33,7 +33,14 @@ namespace RentSwiftly.WebUI.Controllers
             ViewBag.v1 = "Bloglar";
             ViewBag.v2 = "Blog Detayı ve Yorumlar";
             ViewBag.BlogId = id;
+
+            var client = _httpClientFactory.CreateClient();
+            var responseMessageForCommentCount = await client.GetAsync($"https://localhost:7000/api/Comments/GetCountCommentByBlog?id=" + id);
+            var jsonData = await responseMessageForCommentCount.Content.ReadAsStringAsync();
+            ViewBag.CommentCount = jsonData;
             return View();
+
+
         }
     }
 }

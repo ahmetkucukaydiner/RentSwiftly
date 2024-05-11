@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RentSwiftly.Application.Features.RepositoryPattern;
 using RentSwiftly.Domain.Entities;
 
@@ -17,7 +16,7 @@ namespace RentSwiftly.WebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetCommentList() 
+        public IActionResult GetCommentList()
         {
             var values = _commentRepository.GetAll();
             return Ok(values);
@@ -56,6 +55,13 @@ namespace RentSwiftly.WebApi.Controllers
         public IActionResult CommentListByBlog(int id)
         {
             var values = _commentRepository.GetCommentsByBlogId(id);
+            return Ok(values);
+        }
+
+        [HttpGet("GetCountCommentByBlog")]
+        public IActionResult GetCountCommentByBlog(int id)
+        {
+            var values = _commentRepository.GetCountCommentByBlog(id);
             return Ok(values);
         }
     }

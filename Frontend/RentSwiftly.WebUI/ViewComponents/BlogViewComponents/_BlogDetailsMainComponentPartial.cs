@@ -17,8 +17,8 @@ namespace RentSwiftly.WebUI.ViewComponents.BlogViewComponents
         {
             ViewBag.BlogId = id;
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7000/api/Blogs/"+id);
-            if(responseMessage.IsSuccessStatusCode)
+            var responseMessage = await client.GetAsync($"https://localhost:7000/api/Blogs/" + id);
+            if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<GetBlogByIdDto>(jsonData);
