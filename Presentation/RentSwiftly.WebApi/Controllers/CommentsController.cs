@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using RentSwiftly.Application.Features.Mediator.Commands.CommentCommands;
 using RentSwiftly.Application.Features.RepositoryPattern;
 using RentSwiftly.Domain.Entities;
 
@@ -9,10 +11,12 @@ namespace RentSwiftly.WebApi.Controllers
     public class CommentsController : ControllerBase
     {
         private readonly IGenericRepository<Comment> _commentRepository;
+        private readonly IMediator _mediator;
 
-        public CommentsController(IGenericRepository<Comment> commentRepository)
+        public CommentsController(IGenericRepository<Comment> commentRepository, IMediator mediator)
         {
             _commentRepository = commentRepository;
+            _mediator = mediator;
         }
 
         [HttpGet]
@@ -63,6 +67,13 @@ namespace RentSwiftly.WebApi.Controllers
         {
             var values = _commentRepository.GetCountCommentByBlog(id);
             return Ok(values);
+        }
+
+        [HttpPost("CreateCommentWithMediator")]
+        public async Task<IActionResult> CreateCommentWithMediator(CreateCommentCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok("Yorum başarıyla eklendi");
         }
     }
 }
