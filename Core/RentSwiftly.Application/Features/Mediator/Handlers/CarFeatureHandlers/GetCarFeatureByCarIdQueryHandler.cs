@@ -21,7 +21,8 @@ namespace RentSwiftly.Application.Features.Mediator.Handlers.CarFeatureHandlers
             {
                 Available = x.Available,
                 CarFeatureID = x.CarFeatureID,
-                FeatureID = x.FeatureID
+                FeatureID = x.FeatureID,
+                FeatureName = x.Feature.Name
             }).ToList();
         }
     }

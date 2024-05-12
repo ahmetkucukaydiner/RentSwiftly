@@ -1,4 +1,5 @@
-﻿using RentSwiftly.Application.Interfaces.CarFeatureInterfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using RentSwiftly.Application.Interfaces.CarFeatureInterfaces;
 using RentSwiftly.Domain.Entities;
 using RentSwiftly.Persistence.Context;
 
@@ -15,7 +16,7 @@ namespace RentSwiftly.Persistence.Repositories.CarFeatureRepositories
 
         public List<CarFeature> GetCarFeaturesByCarId(int carId)
         {
-            var values = _context.CarFeatures.Where(x => x.CarID == carId).ToList();
+            var values = _context.CarFeatures.Include(y => y.Feature).Where(x => x.CarID == carId).ToList();
             return values;
         }
     }
