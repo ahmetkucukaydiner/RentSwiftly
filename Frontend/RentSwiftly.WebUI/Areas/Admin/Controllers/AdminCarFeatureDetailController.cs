@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RentSwiftly.Dto.CarFeatureDtos;
-using System.Text;
 
 namespace RentSwiftly.WebUI.Areas.Admin.Controllers
 {
@@ -31,25 +30,24 @@ namespace RentSwiftly.WebUI.Areas.Admin.Controllers
             return View();
         }
 
-        [Route("Index")]
+        [Route("Index/{id}")]
         [HttpPost]
         public async Task<IActionResult> Index(List<ResultCarFeatureByCarIdDto> resultCarFeatureByCarIdDto)
         {
+            var client = _httpClientFactory.CreateClient();
+
             foreach (var item in resultCarFeatureByCarIdDto)
             {
                 if (item.Available)
                 {
-                    var client = _httpClientFactory.CreateClient();
-                    var jsonData = JsonConvert.SerializeObject(resultCarFeatureByCarIdDto);
-                    StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                    await client.PutAsync("https://localhost:7000/api/");
-                    return RedirectToAction("Index", "AdminCar");
+                    await client.GetAsync("https://localhost:7000/api/carfeatures/CarFeatureChangeAvailableToTrue?id=" + item.CarFeatureId);
                 }
                 else
                 {
-
+                    await client.GetAsync("https://localhost:7000/api/carfeatures/CarFeatureChangeAvailableToFalse?id=" + item.CarFeatureId);
                 }
             }
+            return RedirectToAction("Index", "AdminCar");
         }
     }
 }
