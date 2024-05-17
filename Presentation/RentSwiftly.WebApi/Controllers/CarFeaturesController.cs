@@ -36,5 +36,12 @@ namespace RentSwiftly.WebApi.Controllers
             await _mediator.Send(new UpdateCarFeatureAvailableChangeToTrueCommand(id));
             return Ok("Güncelleme yapıldı.");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCarFeatureByCarId(CreateCarFeatureByCarCommand createCarFeatureByCarCommand)
+        {
+            await _mediator.Send(createCarFeatureByCarCommand);
+            return Ok("Ekleme yapıldı.");
+        }
     }
 }
