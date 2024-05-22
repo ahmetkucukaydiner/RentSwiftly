@@ -7,6 +7,7 @@ using RentSwiftly.Application.Features.CQRS.Handlers.ContactHandlers;
 using RentSwiftly.Application.Features.RepositoryPattern;
 using RentSwiftly.Application.Interfaces;
 using RentSwiftly.Application.Interfaces.BlogInterfaces;
+using RentSwiftly.Application.Interfaces.CarDescriptionInterfaces;
 using RentSwiftly.Application.Interfaces.CarFeatureInterfaces;
 using RentSwiftly.Application.Interfaces.CarInterfaces;
 using RentSwiftly.Application.Interfaces.CarPricingInterfaces;
@@ -18,6 +19,7 @@ using RentSwiftly.Domain.Entities;
 using RentSwiftly.Persistence.Context;
 using RentSwiftly.Persistence.Repositories;
 using RentSwiftly.Persistence.Repositories.BlogRepositories;
+using RentSwiftly.Persistence.Repositories.CarDescriptionRepositories;
 using RentSwiftly.Persistence.Repositories.CarFeatureRepositories;
 using RentSwiftly.Persistence.Repositories.CarPricingRepositories;
 using RentSwiftly.Persistence.Repositories.CarRepositories;
@@ -39,6 +41,7 @@ builder.Services.AddScoped(typeof(ITagCloudRepository), typeof(TagCloudRepositor
 builder.Services.AddScoped(typeof(IStatisticsRepository), typeof(StatisticsRepository));
 builder.Services.AddScoped(typeof(IGenericRepository<Comment>), typeof(CommentRepository));
 builder.Services.AddScoped(typeof(ICarFeatureRepository), typeof(CarFeatureRepository));
+builder.Services.AddScoped(typeof(ICarDescriptionRepository), typeof(CarDescriptionRepository));
 
 builder.Services.AddScoped<GetAboutQueryHandler>();
 builder.Services.AddScoped<GetAboutByIdQueryHandler>();
@@ -91,8 +94,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+	app.UseSwagger();
+	app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
