@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using RentSwiftly.Application.Features.Mediator.Commands.ReviewCommands;
 using RentSwiftly.Application.Features.Mediator.Queries.ReviewQueries;
 
 namespace RentSwiftly.WebApi.Controllers
@@ -20,6 +21,20 @@ namespace RentSwiftly.WebApi.Controllers
 		{
 			var values = await _mediator.Send(new GetReviewByCarIdQuery(id));
 			return Ok(values);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> CreateReview(CreateReviewCommand createReviewCommand)
+		{
+			await _mediator.Send(createReviewCommand);
+			return Ok("Ekleme işlemi gerçekleştirildi.");
+		}
+
+		[HttpPut]
+		public async Task<IActionResult> UpdateReview(UpdateReviewCommand updateReviewCommand)
+		{
+			await _mediator.Send(updateReviewCommand);
+			return Ok("Güncelleme işlemi gerçekleştirildi.");
 		}
 	}
 }
