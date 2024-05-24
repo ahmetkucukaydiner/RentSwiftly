@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using RentSwiftly.Application.Features.CQRS.Handlers.AboutHandlers;
 using RentSwiftly.Application.Features.CQRS.Handlers.BannerHandlers;
 using RentSwiftly.Application.Features.CQRS.Handlers.BrandHandlers;
@@ -29,6 +30,7 @@ using RentSwiftly.Persistence.Repositories.RentACarRepositories;
 using RentSwiftly.Persistence.Repositories.ReviewRepositories;
 using RentSwiftly.Persistence.Repositories.StatisticsRepositories;
 using RentSwiftly.Persistence.Repositories.TagCloudRepositories;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -85,6 +87,11 @@ builder.Services.AddScoped<DeleteContactCommandHandler>();
 builder.Services.AddScoped<UpdateContactCommandHandler>();
 
 builder.Services.AddApplicationService(builder.Configuration);
+
+builder.Services.AddControllers().AddFluentValidation(x =>
+{
+	x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+});
 
 
 builder.Services.AddControllers();

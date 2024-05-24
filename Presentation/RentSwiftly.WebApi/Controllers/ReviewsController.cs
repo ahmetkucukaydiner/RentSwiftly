@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RentSwiftly.Application.Features.Mediator.Commands.ReviewCommands;
 using RentSwiftly.Application.Features.Mediator.Queries.ReviewQueries;
+using RentSwiftly.Application.Validators.ReviewValidators;
 
 namespace RentSwiftly.WebApi.Controllers
 {
@@ -26,6 +27,12 @@ namespace RentSwiftly.WebApi.Controllers
 		[HttpPost]
 		public async Task<IActionResult> CreateReview(CreateReviewCommand createReviewCommand)
 		{
+			CreateReviewValidator validator = new CreateReviewValidator();
+			var validationResult = validator.Validate(createReviewCommand);
+			if (!validationResult.IsValid)
+			{
+				return BadRequest(validationResult.Errors);
+			}
 			await _mediator.Send(createReviewCommand);
 			return Ok("Ekleme işlemi gerçekleştirildi.");
 		}
