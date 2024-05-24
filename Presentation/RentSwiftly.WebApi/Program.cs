@@ -12,6 +12,7 @@ using RentSwiftly.Application.Interfaces.CarFeatureInterfaces;
 using RentSwiftly.Application.Interfaces.CarInterfaces;
 using RentSwiftly.Application.Interfaces.CarPricingInterfaces;
 using RentSwiftly.Application.Interfaces.RentACarInterfaces;
+using RentSwiftly.Application.Interfaces.ReviewInterfaces;
 using RentSwiftly.Application.Interfaces.StatisticsInterfaces;
 using RentSwiftly.Application.Interfaces.TagCloudInterfaces;
 using RentSwiftly.Application.Services;
@@ -25,6 +26,7 @@ using RentSwiftly.Persistence.Repositories.CarPricingRepositories;
 using RentSwiftly.Persistence.Repositories.CarRepositories;
 using RentSwiftly.Persistence.Repositories.CommentRepositories;
 using RentSwiftly.Persistence.Repositories.RentACarRepositories;
+using RentSwiftly.Persistence.Repositories.ReviewRepositories;
 using RentSwiftly.Persistence.Repositories.StatisticsRepositories;
 using RentSwiftly.Persistence.Repositories.TagCloudRepositories;
 
@@ -42,6 +44,7 @@ builder.Services.AddScoped(typeof(IStatisticsRepository), typeof(StatisticsRepos
 builder.Services.AddScoped(typeof(IGenericRepository<Comment>), typeof(CommentRepository));
 builder.Services.AddScoped(typeof(ICarFeatureRepository), typeof(CarFeatureRepository));
 builder.Services.AddScoped(typeof(ICarDescriptionRepository), typeof(CarDescriptionRepository));
+builder.Services.AddScoped(typeof(IReviewRepository), typeof(ReviewRepository));
 
 builder.Services.AddScoped<GetAboutQueryHandler>();
 builder.Services.AddScoped<GetAboutByIdQueryHandler>();
