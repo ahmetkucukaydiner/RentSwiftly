@@ -43,7 +43,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 	opt.TokenValidationParameters = new TokenValidationParameters
 	{
 		ValidAudience = "https://localhost",
-		ValidIssuer = "http://localhost",
+		ValidIssuer = "https://localhost",
 		ClockSkew = TimeSpan.Zero,
 		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("rentswiftlyrent1")),
 		ValidateLifetime = true,
