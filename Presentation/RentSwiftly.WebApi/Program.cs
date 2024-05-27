@@ -1,4 +1,6 @@
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using RentSwiftly.Application.Features.CQRS.Handlers.AboutHandlers;
 using RentSwiftly.Application.Features.CQRS.Handlers.BannerHandlers;
 using RentSwiftly.Application.Features.CQRS.Handlers.BrandHandlers;
@@ -31,8 +33,23 @@ using RentSwiftly.Persistence.Repositories.ReviewRepositories;
 using RentSwiftly.Persistence.Repositories.StatisticsRepositories;
 using RentSwiftly.Persistence.Repositories.TagCloudRepositories;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+	opt.RequireHttpsMetadata = false;
+	opt.TokenValidationParameters = new TokenValidationParameters
+	{
+		ValidAudience = "https://localhost",
+		ValidIssuer = "http://localhost",
+		ClockSkew = TimeSpan.Zero,
+		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("rentswiftlyrent1")),
+		ValidateLifetime = true,
+		ValidateIssuerSigningKey = true
+	};
+});
 
 // Add services to the container.
 builder.Services.AddScoped<RentSwiftlyContext>();
