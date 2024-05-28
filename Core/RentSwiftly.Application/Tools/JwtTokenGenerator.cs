@@ -30,6 +30,7 @@ namespace RentSwiftly.Application.Tools
 			JwtSecurityToken token = new JwtSecurityToken(issuer: JwtTokenDefaults.ValidIssuer, audience: JwtTokenDefaults.ValidAudience, claims: claims, notBefore: DateTime.UtcNow, expires: expireDate, signingCredentials: signingCredentials);
 
 			JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+
 			return new TokenResponseDto(tokenHandler.WriteToken(token), expireDate);
 		}
 	}

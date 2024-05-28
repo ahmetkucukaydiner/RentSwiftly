@@ -19,6 +19,7 @@ using RentSwiftly.Application.Interfaces.ReviewInterfaces;
 using RentSwiftly.Application.Interfaces.StatisticsInterfaces;
 using RentSwiftly.Application.Interfaces.TagCloudInterfaces;
 using RentSwiftly.Application.Services;
+using RentSwiftly.Application.Tools;
 using RentSwiftly.Domain.Entities;
 using RentSwiftly.Persistence.Context;
 using RentSwiftly.Persistence.Repositories;
@@ -42,10 +43,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 	opt.RequireHttpsMetadata = false;
 	opt.TokenValidationParameters = new TokenValidationParameters
 	{
-		ValidAudience = "https://localhost",
-		ValidIssuer = "https://localhost",
+		ValidAudience = JwtTokenDefaults.ValidAudience,
+		ValidIssuer = JwtTokenDefaults.ValidIssuer,
 		ClockSkew = TimeSpan.Zero,
-		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("rentswiftlyrent1")),
+		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtTokenDefaults.Key)),
 		ValidateLifetime = true,
 		ValidateIssuerSigningKey = true
 	};
@@ -126,6 +127,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
