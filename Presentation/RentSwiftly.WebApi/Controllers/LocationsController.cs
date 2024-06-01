@@ -1,11 +1,12 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RentSwiftly.Application.Features.Mediator.Commands.LocationCommands;
 using RentSwiftly.Application.Features.Mediator.Queries.LocationQueries;
 
 namespace RentSwiftly.WebApi.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class LocationsController : ControllerBase
@@ -25,7 +26,7 @@ namespace RentSwiftly.WebApi.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteLocation(int id) 
+        public async Task<IActionResult> DeleteLocation(int id)
         {
             await _mediator.Send(new DeleteLocationCommand(id));
             return Ok("Lokasyon başarıyla silindi.");
@@ -44,13 +45,13 @@ namespace RentSwiftly.WebApi.Controllers
             var values = await _mediator.Send(new GetLocationQuery());
             return Ok(values);
         }
-       
+
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetLocation(int id) 
+        public async Task<IActionResult> GetLocation(int id)
         {
             var value = await _mediator.Send(new GetLocationByIdQuery(id));
             return Ok(value);
         }
-        
+
     }
 }
