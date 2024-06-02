@@ -33,23 +33,39 @@ using RentSwiftly.Persistence.Repositories.RentACarRepositories;
 using RentSwiftly.Persistence.Repositories.ReviewRepositories;
 using RentSwiftly.Persistence.Repositories.StatisticsRepositories;
 using RentSwiftly.Persistence.Repositories.TagCloudRepositories;
+using RentSwiftly.WebApi.Hubs;
 using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddHttpClient();
+
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyHeader()
+        .AllowAnyMethod()
+        .SetIsOriginAllowed((host) => true)
+        .AllowCredentials();
+    });
+});
+
+builder.Services.AddSignalR();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {
-	opt.RequireHttpsMetadata = false;
-	opt.TokenValidationParameters = new TokenValidationParameters
-	{
-		ValidAudience = JwtTokenDefaults.ValidAudience,
-		ValidIssuer = JwtTokenDefaults.ValidIssuer,
-		ClockSkew = TimeSpan.Zero,
-		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtTokenDefaults.Key)),
-		ValidateLifetime = true,
-		ValidateIssuerSigningKey = true
-	};
+    opt.RequireHttpsMetadata = false;
+    opt.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidAudience = JwtTokenDefaults.ValidAudience,
+        ValidIssuer = JwtTokenDefaults.ValidIssuer,
+        ClockSkew = TimeSpan.Zero,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtTokenDefaults.Key)),
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true
+    };
 });
 
 // Add services to the container.
@@ -108,7 +124,7 @@ builder.Services.AddApplicationService(builder.Configuration);
 
 builder.Services.AddControllers().AddFluentValidation(x =>
 {
-	x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+    x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 });
 
 
@@ -122,9 +138,11 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-	app.UseSwagger();
-	app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();
 
@@ -133,5 +151,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<CarHub>("/carhub");
 
 app.Run();
